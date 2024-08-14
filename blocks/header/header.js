@@ -1,6 +1,7 @@
 import { cartApi } from '../../scripts/minicart/api.js';
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { fetchIndex } from '../../scripts/scripts.js';
 
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
@@ -118,6 +119,22 @@ export default async function decorate(block) {
 
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
+    const index = await fetchIndex('query-index');
+    const ul = document.createElement('ul');
+    index.data
+      .filter((element) => element.type === 'category').forEach((element) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.setAttribute('href', element.path);
+        a.setAttribute('title', element.title);
+        a.innerText = element.title;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+    const li = document.createElement('li');
+    li.innerText = 'Catalog';
+    li.appendChild(ul);
+    navSections.querySelector(':scope .default-content-wrapper > ul').insertBefore(li, navSections.querySelector(':scope .default-content-wrapper > ul').firstChild);
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {

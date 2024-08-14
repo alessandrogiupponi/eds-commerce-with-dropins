@@ -1,4 +1,4 @@
-export default `query productSearch($currentPage: Int = 1) {
+export default `query productSearch($currentPage: Int = 1) {˙˙˙˙˘¯Å 
   productSearch(current_page: $currentPage, page_size: 20, phrase: "") {
     items {
       productView {

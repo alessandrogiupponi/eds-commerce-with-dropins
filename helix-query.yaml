@@ -1,6 +1,9 @@
 version: 1
 indices:
   default:
+    target: /query-index.json
+    include:
+      - /**
     properties:
       title:
         select: head > meta[property="og:title"]

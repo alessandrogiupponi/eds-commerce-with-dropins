@@ -1,5 +1,30 @@
 version: 1
 indices:
+  default:
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: |
+          attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: |
+          attribute(el, 'content')
+      description:
+        select: head > meta[property="description"]
+        value: |
+          attribute(el, 'content')
+      lastModified:
+        select: none 
+        value: parseTimestamp (headers ["last-modified"], "ddd, DD MMM YYYY hh: mm: ss GMT")
+      robots:
+        select: head > meta[property="robots"]
+        value: |
+          attribute(el, 'content')
+      type:
+        select: head > meta[property="type"]
+        value: |
+          attribute(el, 'content')
   enrichment:
     target: /enrichment/enrichment.json
     include:

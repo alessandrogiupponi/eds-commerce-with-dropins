@@ -588,3 +588,4 @@ export default async function decorate(block) {
     render(app, block);
   });
 }
+

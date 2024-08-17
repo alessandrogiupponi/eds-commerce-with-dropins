@@ -1,21 +1,17 @@
 import { getConfigValue } from '../../scripts/configs.js';
-import filmsGraphql from '../../tools/queries/films.graphql.js';
+import filmsGraphql from '../../tools/film-data/queries/films.graphql.js';
+import { readBlockConfig } from '../../scripts/aem.js';
+import { h, render } from '../../scripts/preact.js';
+import htm from '../../scripts/htm.js';
+import FilmList from './FilmList.js';
+
+const html = htm.bind(h);
 
 export default async function decorate(block) {
-  block.textContent = '';
+  const config = readBlockConfig(block);
   const swapiDetails = {
     swapiEndPoint: await getConfigValue('swapi-endpoint'),
   };
-  fetch(swapiDetails.swapiEndPoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({
-      filmsGraphql,
-    }),
-  })
-    .then((r) => r.json())
-    .then((data) => console.log('data returned:', data));
+
+  render(html`<${FilmList} ...${config} block=${block} swapiDetails=${swapiDetails} />`, block);
 }

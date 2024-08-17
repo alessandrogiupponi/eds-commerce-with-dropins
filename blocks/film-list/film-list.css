@@ -1,0 +1,35 @@
+.film-list .table {
+    width: 100%;
+    display: table;
+}
+
+.film-list .table-header{
+    display: table-header-group;
+    background-color: gray;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.film-list .table-header-cell{
+    display: table-cell;
+    padding: 10px;
+    text-align: justify;
+    border-bottom: 1px solid black;
+}
+
+.film-list .table-body{
+    display: table-row-group;
+}
+
+.film-list .table-row{
+    display: table-row;
+}
+
+.film-list .table-body-cell{
+    display: table-cell;
+    border-bottom: 1px solid darkgrey;
+}
+
+.film-list .table-body-cell.clickable{
+    cursor: pointer;
+}

@@ -1,8 +1,9 @@
 /* eslint-disable object-curly-spacing, class-methods-use-this */
 import { h, Component } from '../../scripts/preact.js';
 import htm from '../../scripts/htm.js';
-import query from '../../tools/film-data/queries/films.graphql.js';
+import filmsQuery from '../../tools/film-data/queries/films.graphql.js';
 import FilmListItem from './FilmListItem.js';
+import { getFilms } from '../../scripts/star-wars.js';
 
 const html = htm.bind(h);
 
@@ -17,23 +18,12 @@ class FilmList extends Component {
   }
 
   componentDidMount() {
-    fetch(this.swapiDetails.swapiEndPoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        query,
-      }),
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        this.setState({
-          loading: false,
-          films: data.data.allFilms.films,
-        });
+    getFilms().then((data) => {
+      this.setState({
+        loading: false,
+        films: data,
       });
+    });
   }
 
   render(props, state) {

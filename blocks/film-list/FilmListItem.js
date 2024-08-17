@@ -15,7 +15,7 @@ class FilmListItem extends Component {
   }
 
   clicked(id) {
-    console.log(id);
+    window.location.href = `/films/film/${id.replaceAll('=', '-')}`;
   }
 
   render() {

@@ -22,6 +22,7 @@ import {
 } from './aem.js';
 import { getProduct, getSkuFromUrl, trackHistory } from './commerce.js';
 import initializeDropins from './dropins.js';
+import { getFilm, getFilmIDFromUrl } from './star-wars.js';
 
 const AUDIENCES = {
   mobile: () => window.innerWidth < 600,
@@ -140,7 +141,17 @@ async function loadEager(doc) {
   window.adobeDataLayer = window.adobeDataLayer || [];
 
   let pageType = 'CMS';
-  if (document.body.querySelector('main .product-details')) {
+  if (document.body.querySelector('main .film-details')) {
+    pageType = 'Film';
+    const sku = getFilmIDFromUrl();
+    window.getFilmPromise = getFilm(sku);
+
+    preloadFile('/scripts/__dropins__/storefront-pdp/containers/ProductDetails.js', 'script');
+    preloadFile('/scripts/__dropins__/storefront-pdp/api.js', 'script');
+    preloadFile('/scripts/__dropins__/storefront-pdp/render.js', 'script');
+    preloadFile('/scripts/__dropins__/storefront-pdp/chunks/initialize.js', 'script');
+    preloadFile('/scripts/__dropins__/storefront-pdp/chunks/getRefinedProduct.js', 'script');
+  } else if (document.body.querySelector('main .product-details')) {
     pageType = 'Product';
     const sku = getSkuFromUrl();
     window.getProductPromise = getProduct(sku);

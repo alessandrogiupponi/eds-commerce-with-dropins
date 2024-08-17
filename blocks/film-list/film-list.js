@@ -1,5 +1,4 @@
 import { getConfigValue } from '../../scripts/configs.js';
-import filmsGraphql from '../../tools/film-data/queries/films.graphql.js';
 import { readBlockConfig } from '../../scripts/aem.js';
 import { h, render } from '../../scripts/preact.js';
 import htm from '../../scripts/htm.js';

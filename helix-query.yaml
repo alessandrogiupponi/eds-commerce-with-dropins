@@ -43,3 +43,7 @@ indices:
         select: head > meta[name="enrichment-positions"]
         values: |
           match(attribute(el, 'content'), '([^,]+)')
+      films:
+        select: head > meta[name="enrichment-films"]
+        values: |
+          match(attribute(el, 'content'), '([^,]+)')

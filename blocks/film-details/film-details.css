@@ -1,0 +1,18 @@
+.film-details .quote {
+    margin-top: 2em;
+    background: #eee;
+    padding: 1em;
+    border-radius: 1em;
+}
+.film-details .quote blockquote {
+    margin: 1em;
+}
+.film-details blockquote::before {
+    content: open-quote;
+}
+.film-details blockquote::after {
+    content: close-quote;
+}
+.film-details blockquote {
+    quotes: "“" "”" "‘" "’";
+}

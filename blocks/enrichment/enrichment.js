@@ -2,12 +2,21 @@ import { readBlockConfig } from '../../scripts/aem.js';
 import { fetchIndex } from '../../scripts/scripts.js';
 import { getSkuFromUrl } from '../../scripts/commerce.js';
 import { loadFragment } from '../fragment/fragment.js';
+import { getFilmIDFromUrl } from '../../scripts/star-wars.js';
 
 export default async function decorate(block) {
   const { type, position } = readBlockConfig(block);
 
   try {
     const filters = {};
+    if (type === 'film') {
+      const filmId = getFilmIDFromUrl();
+      if (!filmId) {
+        throw new Error('No film found in URL');
+      }
+      filters.films = filmId;
+    }
+
     if (type === 'product') {
       const productSku = getSkuFromUrl();
       if (!productSku) {

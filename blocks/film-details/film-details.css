@@ -16,3 +16,11 @@
 .film-details blockquote {
     quotes: "“" "”" "‘" "’";
 }
+
+.film-details .character {
+    display: inline-block;
+    background: #eee;
+    border-radius: 1em;
+    padding: 1em;
+    margin: .5em;
+}

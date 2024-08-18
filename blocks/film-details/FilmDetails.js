@@ -15,6 +15,10 @@ class FilmDetails extends Component {
         <div class="quote">
             <blockquote>${this.film.openingCrawl}</blockquote>
         </div>
+        <h4>With</h4>
+        <div>
+            ${this.film.characterConnection.characters.map((character) => html`<div class="character">${character.name}</div>`)}
+        </div>
     </div>`;
   }
 }
